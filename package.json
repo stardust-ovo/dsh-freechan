@@ -1,0 +1,60 @@
+{
+  "name": "dsh-freechan",
+  "version": "0.2.0",
+  "description": "DSH plugin: turn free web AI and free APIs into native tools (ask / image / condense / dispatch), with automatic provider fallback.",
+  "type": "module",
+  "main": "lib/index.js",
+  "exports": {
+    ".": "./lib/index.js"
+  },
+  "files": [
+    "lib",
+    "providers.json",
+    "cordis.patch.yml",
+    "docs",
+    "selftest.mjs",
+    "README.md",
+    "LICENSE"
+  ],
+  "keywords": [
+    "dsh",
+    "deepseek-harness",
+    "plugin",
+    "free-ai",
+    "playwright",
+    "llm",
+    "automation",
+    "qwen",
+    "kimi",
+    "glm"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/stardust-ovo/dsh-freechan.git"
+  },
+  "bugs": {
+    "url": "https://github.com/stardust-ovo/dsh-freechan/issues"
+  },
+  "homepage": "https://github.com/stardust-ovo/dsh-freechan#readme",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "check": "node --check lib/index.js",
+    "selftest": "node selftest.mjs"
+  },
+  "peerDependencies": {
+    "@deepseek-ai/dsh-tools": "*"
+  },
+  "peerDependenciesMeta": {
+    "@deepseek-ai/dsh-tools": {
+      "optional": true
+    }
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  }
+}

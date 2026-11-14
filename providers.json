@@ -1,0 +1,164 @@
+{
+  "version": 1,
+  "updated": "2026-11-14",
+  "web": {
+    "qwen": {
+      "label": "通义千问",
+      "url": "https://www.qianwen.com/",
+      "input": "div[contenteditable='true'], textarea",
+      "reply": "div[class*='markdown'], div[class*='answer']",
+      "submit": "newline",
+      "login_markers": [
+        "扫码登录",
+        "登录后可",
+        "请登录"
+      ],
+      "note": "免登录可聊，触发滑块需人工过一次"
+    },
+    "kimi": {
+      "label": "Kimi",
+      "url": "https://www.kimi.com/",
+      "input": "div[contenteditable='true'], textarea",
+      "reply": "div[class*='markdown'], div[class*='segment']",
+      "submit": "newline",
+      "login_markers": [
+        "扫码登录",
+        "手机号登录",
+        "登录后"
+      ],
+      "note": "需登录态，长文摘要稳"
+    },
+    "doubao": {
+      "label": "豆包",
+      "url": "https://www.doubao.com/chat/",
+      "input": "div[contenteditable='true'], textarea",
+      "reply": "div[class*='message'] div[class*='content'], div[class*='markdown']",
+      "submit": "newline",
+      "login_markers": [
+        "扫码登录",
+        "登录后"
+      ],
+      "note": "需登录，出图出片强"
+    },
+    "chatgpt": {
+      "label": "ChatGPT",
+      "url": "https://chatgpt.com/",
+      "input": "div#prompt-textarea, textarea",
+      "reply": "div[data-message-author-role='assistant']",
+      "submit": "enter",
+      "login_markers": [
+        "Log in",
+        "Sign up"
+      ],
+      "note": "需登录；地区限制"
+    },
+    "claude": {
+      "label": "Claude",
+      "url": "https://claude.ai/new",
+      "input": "div[contenteditable='true']",
+      "reply": "div[data-testid='chat-message-content'], div.font-claude-message",
+      "submit": "enter",
+      "login_markers": [
+        "Continue with Google",
+        "Sign in"
+      ],
+      "note": "需登录"
+    },
+    "gemini": {
+      "label": "Gemini",
+      "url": "https://gemini.google.com/app",
+      "input": "div[contenteditable='true'], rich-textarea",
+      "reply": "message-content, div[class*='response-content']",
+      "submit": "enter",
+      "login_markers": [
+        "Sign in",
+        "登录"
+      ],
+      "note": "需 Google 账号"
+    },
+    "grok": {
+      "label": "Grok",
+      "url": "https://grok.com/",
+      "input": "textarea, div[contenteditable='true']",
+      "reply": "div[class*='message'], div[class*='prose']",
+      "submit": "enter",
+      "login_markers": [
+        "Sign in",
+        "Sign up"
+      ],
+      "note": "需 X 账号"
+    },
+    "zhipu_web": {
+      "label": "智谱清言(网页)",
+      "url": "https://chatglm.cn/main/alltoolsdetail",
+      "input": "textarea, div[contenteditable='true']",
+      "reply": "div[class*='markdown'], div[class*='answer']",
+      "submit": "newline",
+      "login_markers": [
+        "滑动验证",
+        "扫码登录"
+      ],
+      "note": "阿里云滑块；优先用 API"
+    },
+    "copilot": {
+      "label": "Microsoft Copilot",
+      "url": "https://copilot.microsoft.com/",
+      "input": "textarea, div[contenteditable='true']",
+      "reply": "div[class*='markdown'], div[class*='ac-textBlock']",
+      "submit": "enter",
+      "login_markers": [
+        "Sign in",
+        "登录"
+      ],
+      "note": "免登录有限额度"
+    },
+    "deepseek_web": {
+      "label": "DeepSeek(网页)",
+      "url": "https://chat.deepseek.com/",
+      "input": "textarea#chat-input, textarea, div[contenteditable='true']",
+      "reply": ".ds-markdown, div[class*='markdown']",
+      "submit": "enter",
+      "login_markers": [
+        "登录",
+        "sign_in"
+      ],
+      "note": "需登录；纯文本"
+    }
+  },
+  "api": {
+    "zhipu": {
+      "label": "智谱 GLM",
+      "base": "https://open.bigmodel.cn",
+      "path": "/api/paas/v4/chat/completions",
+      "key_env": "ZAI_API_KEY",
+      "key_file": "~/.dsh/.credentials.yaml",
+      "key_regex": "ZAI_API_KEY\\s*:\\s*(\\S+)",
+      "model": "glm-5.3-flash",
+      "note": "便宜稳定，推荐默认"
+    },
+    "deepseek": {
+      "label": "DeepSeek API",
+      "base": "https://api.deepseek.com",
+      "path": "/chat/completions",
+      "key_env": "DEEPSEEK_API_KEY",
+      "model": "deepseek-chat",
+      "note": "OpenAI 兼容"
+    },
+    "moonshot": {
+      "label": "Moonshot (Kimi) API",
+      "base": "https://api.moonshot.cn",
+      "path": "/v1/chat/completions",
+      "key_env": "MOONSHOT_API_KEY",
+      "model": "moonshot-v1-8k",
+      "note": "OpenAI 兼容"
+    },
+    "openai_compatible": {
+      "label": "任意 OpenAI 兼容端点",
+      "base": "http://127.0.0.1:8000",
+      "path": "/v1/chat/completions",
+      "key_env": "OPENAI_API_KEY",
+      "model": "gpt-4o-mini",
+      "note": "自建 vLLM / one-api / Ollama 网关"
+    }
+  }
+}

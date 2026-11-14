@@ -1,0 +1,7 @@
+node_modules/
+tmp/
+*.log
+apply.log
+ask_log.jsonl
+.env
+.DS_Store

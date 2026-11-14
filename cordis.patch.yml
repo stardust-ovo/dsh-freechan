@@ -1,0 +1,4 @@
+# dsh-freechan bundle patch
+- insert:
+    - id: dsh-freechan
+      name: dsh-freechan
