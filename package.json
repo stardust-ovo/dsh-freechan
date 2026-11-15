@@ -1,6 +1,6 @@
 {
   "name": "dsh-freechan",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "description": "DSH plugin: turn free web AI and free APIs into native tools (ask / image / condense / dispatch), with automatic provider fallback.",
   "type": "module",
   "main": "lib/index.js",

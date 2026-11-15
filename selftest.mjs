@@ -36,12 +36,20 @@ async function run(name, args = {}) {
   }
 }
 
+const offline = process.argv.includes('--offline');
+if (offline) {
+  // 只验纯 Node 路径：陌生机器上没 key、没 python 时也能跑这一段
+  await run('freechan_providers');
+  await run('freechan_doctor');
+  console.log('\n（--offline：跳过需要密钥或本机工具链的工具）');
+} else {
 await run('freechan_doctor');
 await run('freechan_stats');
 await run('freejob', { action: 'list' });
 await run('freeask', { prompt: '只回复两个字：收到' });
 await run('freedispatch', { kind: 'ask', input: '只回复两个字：收到' });
 await run('teleagent', { prompt: '只回复两个字：收到', waitSeconds: 30 });
+}
 if (full) {
   await run('freeimage', { prompt: '一只橘猫，写实风格' });
   await run('freecondense', { path: 'D:/codex-project1/_tools/webscrape/README.md', points: 5 });

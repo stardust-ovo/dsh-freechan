@@ -1,0 +1,31 @@
+name: release
+on:
+  push:
+    tags: ['v*']
+permissions:
+  contents: write
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: 从 CHANGELOG 取本次版本的说明
+        run: |
+          node -e "
+          const fs=require('fs');
+          const tag=process.env.GITHUB_REF_NAME.replace(/^v/,'');
+          const txt=fs.readFileSync('CHANGELOG.md','utf8').split(/\r?\n/);
+          const start=txt.findIndex(l=>l.startsWith('## '+tag));
+          let body='当前版本在 CHANGELOG 里没有条目。';
+          if(start>=0){
+            const rest=txt.slice(start+1);
+            const end=rest.findIndex(l=>l.startsWith('## '));
+            body=rest.slice(0,end<0?undefined:end).join('\n').trim();
+          }
+          fs.writeFileSync('notes.md', body + '\n');
+          "
+      - uses: softprops/action-gh-release@v2
+        with:
+          body_path: notes.md
+          draft: false
+          prerelease: ${{ contains(github.ref_name, '-') }}

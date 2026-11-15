@@ -38,6 +38,17 @@ freechan_doctor()                    → 本机自检
 freeask(prompt="只回复两个字：收到")  → 3–15 秒返回答案
 ```
 
+### 最小可用（只装 API 层，不需要 python）
+
+```bash
+export ZAI_API_KEY=...        # 智谱；或 DEEPSEEK_API_KEY / MOONSHOT_API_KEY
+node scripts/report.mjs       # 看哪家「就绪」
+node selftest.mjs --offline   # 不联网、不需要密钥也能跑的两个工具
+```
+
+此时 `freeask` 走纯 Node 的 fetch，返回体里 `via` 字段是 `api`；
+网页通道会明确提示需要工具链，而不是抛堆栈。
+
 ## 配置通道
 
 编辑 `providers.json`：加网页站点填 `url` + `input`/`reply` 选择器 + `login_markers`；

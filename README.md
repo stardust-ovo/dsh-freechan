@@ -1,5 +1,9 @@
 # dsh-freechan
 
+[![ci](https://github.com/stardust-ovo/dsh-freechan/actions/workflows/ci.yml/badge.svg)](https://github.com/stardust-ovo/dsh-freechan/actions/workflows/ci.yml)
+[![license: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![node](https://img.shields.io/badge/node-%E2%89%A518-brightgreen.svg)](package.json)
+
 把「免费网页版 AI / 免费 API」变成一等工具：在 DeepSeek Harness（DSH）里直接调用，不用拼命令行。
 
 > **English**: A DSH plugin that turns free web AI (Qwen, Kimi, ChatGPT, Claude, Gemini, Grok, Copilot, DeepSeek, Doubao, Zhipu) and free APIs (GLM, DeepSeek, Moonshot, any OpenAI-compatible endpoint) into native tools — with automatic fallback, image generation, long-doc condensation and a local-agent dispatcher.
@@ -73,6 +77,56 @@ git clone <this-repo> "$DSH_HOME/profiles/desktop/node_modules/dsh-freechan"
 ```
 
 详见 `docs/INSTALL.md`。
+
+## 两层：API 层（必备）与网页层（可选）
+
+| 层 | 依赖 | 能力 |
+|---|---|---|
+| **API 层** | Node ≥18 + 一个 key | `freeask` / `freedispatch(kind=ask)`，走智谱、DeepSeek、Moonshot、任意 OpenAI 兼容端点 |
+| **网页层** | 额外 Python + Playwright + 工具链 | 千问 / Kimi / 豆包 / ChatGPT / Claude / Gemini / Grok，以及出图、长文压缩、TeleAgent |
+
+填空 key 就能用：
+
+```bash
+export ZAI_API_KEY=...          # 智谱（免费额度够日常）
+node scripts/report.mjs         # 看哪家就绪
+```
+
+网页层的装法与开关见 [docs/WEB-CHANNELS.md](docs/WEB-CHANNELS.md)。
+
+## 反馈与贡献
+
+| 你想做什么 | 去哪 |
+|---|---|
+| 报缺陷（某工具报错/卡住） | [新建缺陷报告](../../issues/new?template=bug_report.yml)，先把 `node scripts/report.mjs` 的输出贴进去 |
+| 想加一个新的免费网页端 | [新增网页通道](../../issues/new?template=provider_request.yml)，附上你试过的三个选择器 |
+| 想加功能 / 改行为 | [功能建议](../../issues/new?template=feature_request.yml)，说场景不要说方案 |
+| 想聊聊 / 投票 | [Discussions](../../discussions) |
+| 直接交代码 | 看 [CONTRIBUTING.md](CONTRIBUTING.md)，PR 模板会提醒跑哪些检查 |
+
+**报缺陷前先跑这个**（20 秒，自动脱敏，不含任何密钥）：
+
+```bash
+node scripts/report.mjs
+```
+
+## 日常维护
+
+改完代码，一条命令走完「体检 → 版本号 → 推送 → 等 CI」：
+
+```bash
+node scripts/publish.mjs --dry            # 只体检，不推送，不需要令牌
+GH_TOKEN=ghp_xxx node scripts/publish.mjs --bump patch   # 正式发版（0.2.1 → 0.2.2）
+```
+
+它会顺序做四件事，任一步失败即停：
+
+1. `node --check lib/index.js`
+2. `node selftest.mjs`（TeleAgent 没起时该项记 `SKIP`，不算失败）
+3. 改 `package.json` 版本号后调 `scripts/gh_push.mjs` 走 REST API 推送
+4. 轮询 Actions，等到 `completed` 并把结论作为退出码
+
+发版前记得在 `CHANGELOG.md` 顶部加一条；脚本发现当前版本没有对应条目会提示但不阻断。
 
 ## 发布（git 走不通时）
 

@@ -1,0 +1,28 @@
+name: 新增网页通道
+description: 想让插件支持一个新的免费 AI 网页端
+title: "[provider] "
+labels: ["provider", "needs-triage"]
+body:
+  - type: input
+    id: site
+    attributes:
+      label: 站点
+      placeholder: 名称 + 网址
+    validations: { required: true }
+  - type: dropdown
+    id: auth
+    attributes:
+      label: 是否需要登录
+      options: ["免登录可聊", "需登录（我会自己登录）", "需要邀请码/白名单", "不清楚"]
+    validations: { required: true }
+  - type: textarea
+    id: attempt
+    attributes:
+      label: 你在 providers.json 里试过的配置
+      description: 贴你填的 input / reply / submit 三个选择器，以及卡在哪
+      render: jsonc
+  - type: textarea
+    id: value
+    attributes:
+      label: 为什么值得加
+      description: 免费额度、出图能力、长文能力、速度——挑最有用的一点说

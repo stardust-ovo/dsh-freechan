@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 使用问题 / 想法讨论
+    url: https://github.com/stardust-ovo/dsh-freechan/discussions
+    about: 不会复现、想聊天、想投票改功能，去 Discussions
+  - name: 安装与配置文档
+    url: https://github.com/stardust-ovo/dsh-freechan/blob/main/docs/INSTALL.md
+    about: 先看文档，三处登记缺一插件不会加载

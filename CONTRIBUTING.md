@@ -23,6 +23,23 @@
 - `parameters` 用「属性名 → 规格」字典，`required` 内联；注册失败要写 `apply.log`。
 - 改完跑 `node --check lib/index.js` 与 `FREECHAN_SELFTEST=1 node selftest.mjs`。
 
+## 分支与提交
+
+- `main` 始终保持可发布：任何进 main 的改动都要让 `node selftest.mjs` 全绿。
+- 一个 PR 一件事；改行为就同时改 `CHANGELOG.md`（顶部加一条，版本号由维护者发版时定）。
+- 提交信息用 `feat:` / `fix:` / `docs:` / `chore:` 前缀，便于生成 release notes。
+
+## Issue 处理节奏（维护者）
+
+| 类型 | 动作 | 目标时限 |
+|---|---|---|
+| `bug` | 先要 `report.mjs` 输出 → 复现 → 打 `confirmed` 或 `cannot-reproduce` | 3 天内首次回复 |
+| `provider` | 按对方给的选择器本地试一次；免登录的优先收 | 7 天内 |
+| `enhancement` | 只讨论场景，攒够 3 个同向诉求再动手 | 不承诺 |
+| 安全 / 密钥泄露 | 先让对方吊销密钥，再修代码，发布后写进 CHANGELOG | 当天 |
+
+发版走语义化版本：修 bug → `patch`，加通道/加参数 → `minor`，破坏兼容 → `major`。
+
 ## 禁止
 
 - 提交密钥、cookie、登录态。
