@@ -12,8 +12,8 @@
 ## 要开网页通道，需要三样东西
 
 1. **Python 3.10+**，且装好 Playwright：`pip install playwright && playwright install chromium`
-2. **本机工具链脚本**：`_tools/ask.py`、`_tools/freeask2.py`、`_tools/gen_image.py`、`_tools/condense.py`
-   （来自插件作者的 DSH 工作区；尚未单独发布，可在 issue 里索要）
+2. **本机工具链脚本**：**已随仓库发布**，在 `bridge/` 下，无需另找。插件会按
+   `FREECHAN_ASK` → 工作区 `_tools/` → 仓库 `bridge/` 的顺序自动挑一个。
 3. **浏览器登录态**：插件用持久化 profile 目录，掉登录要人工扫码一次
 
 三样齐了以后设置两个环境变量，插件会自动走网页通道：

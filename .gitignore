@@ -5,3 +5,7 @@ apply.log
 ask_log.jsonl
 .env
 .DS_Store
+bridge/tmp/
+bridge/ask_log.jsonl
+__pycache__/
+*.pyc

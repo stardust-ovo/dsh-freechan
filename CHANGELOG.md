@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.4.0 — 2026-11-15
+
+网页层随包发布，别人不用再向作者索要脚本。
+
+- 新增 `bridge/`：`ask.py` / `freeask2.py` / `gen_image.py` / `condense.py` / `glm_api.py` 打进仓库。
+- 工具链解析改为三层：`FREECHAN_ASK`/`FREECHAN_ROOT` 指定 → 工作区 `_tools/` → 仓库自带 `bridge/`；
+  `python` 可来自 `FREECHAN_PYTHON` 或 PATH。
+- 网页通道取回复改成**发送前后 diff 筛块**：首页欢迎语不再被当成答案。
+- 新增两道页面级拦截：命中滑块/验证码文案直接报「需要人工过一次」，命中整页文案特征则丢弃该块。
+- 回答文本清理：截掉 `<memor…`、页脚与导航尾巴。
+- `freechan_doctor` 显示工具链来源（bridge / _tools）。
+- `.gitignore` 补 `bridge/tmp/`、`bridge/ask_log.jsonl`、`__pycache__/`。
+
 ## 0.3.0 — 2026-11-15
 
 **可以被别人装了。** 此前所有工具都 spawn 本机 Python，陌生人 clone 下来跑不通。

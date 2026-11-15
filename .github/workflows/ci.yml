@@ -23,3 +23,11 @@ jobs:
         run: node -e "import('./lib/index.js').then(async m=>{const d=new Map();await m.apply({tools:{register(x){d.set(x.name,x);return()=>{}}},logger:{info(){}}},{});if(d.size<8)process.exit(1);console.log('registered='+d.size)})"
       - name: providers.json valid
         run: node -e "const p=require('./providers.json');if(!p.web||!p.api)process.exit(1);console.log('web='+Object.keys(p.web).length+' api='+Object.keys(p.api).length)"
+      - name: bridge syntax (python)
+        if: matrix.os == 'ubuntu-latest'
+        run: python3 -m py_compile bridge/*.py
+      - name: bridge lists providers (no network, no keys)
+        if: matrix.os == 'ubuntu-latest'
+        run: python3 bridge/ask.py --list
+      - name: bundled bridge is discoverable by the plugin
+        run: node -e "const fs=require('fs');const f='bridge/ask.py';if(!fs.existsSync(f))process.exit(1);const j=JSON.parse(fs.readFileSync('package.json','utf8'));if(!j.files.includes('bridge'))process.exit(1);console.log('bridge bundled ok')"

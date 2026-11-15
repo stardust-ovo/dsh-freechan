@@ -1,0 +1,4 @@
+{"at": "2026-11-15 23:43:04", "channel": "qwen", "ok": true, "ms": 43747, "prompt_chars": 9, "answer_chars": 122, "meta": {"chars": 122, "via": "body"}}
+{"at": "2026-11-15 23:44:21", "channel": "qwen", "ok": true, "ms": 45708, "prompt_chars": 9, "answer_chars": 8, "meta": {"chars": 8, "via": "selector"}}
+{"at": "2026-11-15 23:45:03", "channel": "kimi", "ok": true, "ms": 41773, "prompt_chars": 9, "answer_chars": 2, "meta": {"chars": 2, "via": "selector"}}
+{"at": "2026-11-15 23:45:55", "channel": "qwen", "ok": true, "ms": 45570, "prompt_chars": 9, "answer_chars": 2, "meta": {"chars": 2, "via": "selector"}}
