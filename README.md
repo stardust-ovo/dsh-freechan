@@ -74,6 +74,23 @@ git clone <this-repo> "$DSH_HOME/profiles/desktop/node_modules/dsh-freechan"
 
 详见 `docs/INSTALL.md`。
 
+## 发布（git 走不通时）
+
+有些网络里 `git push` 两条路都断：SSH 报 `Permission denied (publickey)`，HTTPS 报
+`schannel: SEC_E_UNTRUSTED_ROOT`。只要 `api.github.com` 能访问，就用仓库自带的推送脚本：
+
+```bash
+# 令牌：GitHub → Settings → Developer settings → Tokens (classic)
+#      勾 repo；要写 .github/workflows/ 还必须勾 workflow
+GH_TOKEN=ghp_xxx node scripts/gh_push.mjs <owner>/<repo> . main "chore: ..."
+```
+
+它按 blob → tree → commit → ref 的顺序走 REST API，提交前会回读 `HEAD` 与根目录自证；
+空仓库（`GET /git/ref/heads/main` 返回 409）会先放一个 README 造出首个提交再推。
+
+两个已验证的坑：**只有 `repo` 没有 `workflow` 时，写 `.github/workflows/*` 返回 404 而不是 403**；
+令牌过期后返回 401 `Bad credentials`。
+
 ## 配置
 
 | 环境变量 | 作用 |
