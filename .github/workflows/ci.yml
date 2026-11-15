@@ -1,0 +1,25 @@
+name: ci
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+jobs:
+  check:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    env:
+      FREECHAN_SELFTEST: '1'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: syntax
+        run: node --check lib/index.js
+      - name: selftest (identity defineTool, no DSH host needed)
+        run: node -e "import('./lib/index.js').then(async m=>{const d=new Map();await m.apply({tools:{register(x){d.set(x.name,x);return()=>{}}},logger:{info(){}}},{});if(d.size<8)process.exit(1);console.log('registered='+d.size)})"
+      - name: providers.json valid
+        run: node -e "const p=require('./providers.json');if(!p.web||!p.api)process.exit(1);console.log('web='+Object.keys(p.web).length+' api='+Object.keys(p.api).length)"
